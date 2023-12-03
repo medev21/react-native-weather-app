@@ -1,0 +1,6 @@
+.pnpm
+.next
+dist
+node_modules
+.github
+.hushky
