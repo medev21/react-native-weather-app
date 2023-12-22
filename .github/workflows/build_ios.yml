@@ -61,23 +61,24 @@ jobs:
   
         - name: install yarn dependencies
           run:  |
-            yarn install          
-  
-        - name: install Cocoapod dependencies
-          run: |
-            cd ios
-            pod install
+            yarn install --frozen-lockfile --network-timeout 300000
 
         - name: Restore Pods cache
           uses: actions/cache@v2
           with:
             path: |
-                ios/Pods
-                ~/Library/Caches/CocoaPods
-                ~/.cocoapods
-                key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
-                restore-keys: |
-                ${{ runner.os }}-pods-         
+              ios/Pods
+              ~/Library/Caches/CocoaPods
+              ~/.cocoapods
+            key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
+            restore-keys: |
+              ${{ runner.os }}-pods-
+
+        - name: Install Pods
+          run: |
+            echo "Current directory: $(pwd)"
+            cd ios
+            pod install --repo-update && cd ..        
   
         - name: build archive
           run: |
