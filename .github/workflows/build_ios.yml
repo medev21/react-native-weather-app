@@ -70,7 +70,7 @@ jobs:
   
         - name: build archive
           run: |
-            xcodebuild -workspace WeatherApp.xcworkspace \
+            xcodebuild -workspace ios/WeatherApp.xcworkspace \
             -scheme "WeatherApp" \
             -sdk iphoneos \
             -configuration Debug \
@@ -97,5 +97,3 @@ jobs:
             # you can also archive the entire directory 
             # path: ${{ runner.temp }}/build
             retention-days: 3
-        
-        
