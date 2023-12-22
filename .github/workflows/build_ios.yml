@@ -23,7 +23,7 @@ jobs:
           run: |
             # create variables
             CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
-            PP_ARCHIVE=$RUNNER_TEMP/mobile_pp.tgz
+            PP_ARCHIVE=$RUNNER_TEMP/mobile_pp.mobileprovision
             KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
   
             # import certificate and provisioning profile from secrets
@@ -66,7 +66,18 @@ jobs:
         - name: install Cocoapod dependencies
           run: |
             cd ios
-            pod install          
+            pod install
+
+        - name: Restore Pods cache
+          uses: actions/cache@v2
+          with:
+            path: |
+                ios/Pods
+                ~/Library/Caches/CocoaPods
+                ~/.cocoapods
+                key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
+                restore-keys: |
+                ${{ runner.os }}-pods-         
   
         - name: build archive
           run: |
@@ -75,7 +86,7 @@ jobs:
             -sdk iphoneos \
             -configuration Debug \
             -destination generic/platform=iOS \
-            -archivePath $RUNNER_TEMP/weatherApp.xcarchive \
+            -archivePath $RUNNER_TEMP/WeatherApp.xcarchive \
             archive          
   
         - name: export ipa
