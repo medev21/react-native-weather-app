@@ -41,7 +41,6 @@ jobs:
   
             # extract and copy provisioning profile(s)
             mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-            tar xzvf $PP_ARCHIVE -C $RUNNER_TEMP
             for PROVISION in `ls $RUNNER_TEMP/*.mobileprovision`
             do
               UUID=`/usr/libexec/PlistBuddy -c 'Print :UUID' /dev/stdin <<< $(security cms -D -i $PROVISION)`
