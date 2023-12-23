@@ -86,12 +86,12 @@ jobs:
             -sdk iphoneos \
             -configuration Debug \
             -destination generic/platform=iOS \
-            archive -archivePath $RUNNER_TEMP/WeatherApp.xcarchive -allowProvisioningUpdates
+            archive -archivePath $RUNNER_TEMP/WeatherApp.xcarchive -allowProvisioningUpdates \
             PROVISIONING_STYLE="Manual" \
             PROVISIONING_PROFILE={$PROVISION_PROFILES_BASE64} \ 
             CODE_SIGN_STYLE="Manual" \
             CODE_SIGN_IDENTITY={$BUILD_CERTIFICATE_BASE64}
-  
+
         - name: Export ipa
           run: |
             EXPORT_OPTS_PATH=$RUNNER_TEMP/ExportOptions.plist
