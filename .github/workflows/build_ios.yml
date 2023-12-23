@@ -91,7 +91,7 @@ jobs:
             -configuration Debug \
             -destination generic/platform=iOS \
             -archivePath $RUNNER_TEMP/WeatherApp.xcarchive \
-            archive \
+            archive -allowProvisioningUpdates
             PROVISIONING_STYLE="Manual" \
             PROVISIONING_PROFILE={$PROVISION_PROFILES_BASE64} \ 
             CODE_SIGN_STYLE="Manual" \
