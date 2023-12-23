@@ -86,11 +86,7 @@ jobs:
             -sdk iphoneos \
             -configuration Debug \
             -destination generic/platform=iOS \
-            archive -archivePath $RUNNER_TEMP/WeatherApp.xcarchive -allowProvisioningUpdates \
-            PROVISIONING_STYLE="Manual" \
-            PROVISIONING_PROFILE={$PROVISION_PROFILES_BASE64} \ 
-            CODE_SIGN_STYLE="Manual" \
-            CODE_SIGN_IDENTITY={$BUILD_CERTIFICATE_BASE64}
+            archive -archivePath $RUNNER_TEMP/WeatherApp.xcarchive 
 
         - name: Export ipa
           run: |
@@ -115,3 +111,9 @@ jobs:
           run: |
             security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
             rm ~/Library/MobileDevice/Provisioning\ Profiles/*.mobileprovision
+
+# -allowProvisioningUpdates
+# PROVISIONING_STYLE="Manual" \
+# PROVISIONING_PROFILE={$PROVISION_PROFILES_BASE64} \ 
+# CODE_SIGN_STYLE="Manual" \
+# CODE_SIGN_IDENTITY={$BUILD_CERTIFICATE_BASE64}
