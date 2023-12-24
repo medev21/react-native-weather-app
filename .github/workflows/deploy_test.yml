@@ -26,7 +26,7 @@ jobs:
               uses: actions/upload-artifact@v3
               with:
                 name: app_artifact
-                path: dummy.txt
+                path: dummy.ipa
                 retention-days: 3
             
 
