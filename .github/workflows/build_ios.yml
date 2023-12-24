@@ -149,6 +149,7 @@ jobs:
           with:
             name: ${{ env.ARTIFACT_NAME }}
             # path: ${{ runner.temp }}/build
+            path: ${{ env.EXPORT_PATH_STAGING }}
 
         - name: Display structure of download files
           run: ls
