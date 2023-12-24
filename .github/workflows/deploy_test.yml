@@ -1,4 +1,4 @@
-name: IOS Production Build
+name: Deployment-test
 
 on: [push]
 
@@ -14,10 +14,11 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-
-        - uses: actions/checkout@master
-            
-        - uses: actions/actions/download-artifact@v3
+        - name: checkout repository
+          uses: actions/checkout@v3
+          
+        - name: download artifact 
+          uses: actions/actions/download-artifact@v3
           with:
             name: ${{ env.ARTIFACT_NAME }}
             
