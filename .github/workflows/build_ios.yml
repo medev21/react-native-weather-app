@@ -1,10 +1,10 @@
 name: IOS Production Build
 
-# on: [push]
-on:
-    push:
-        branches:
-            - test
+on: [push]
+# on:
+#     push:
+#         branches:
+#             - test
 
 env:
     BUILD_CERTIFICATE_BASE64: ${{ secrets.IOS_P12_BASE64 }}
@@ -13,6 +13,7 @@ env:
     KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
     EXPORT_OPTIONS_PLIST: ${{ secrets.EXPORT_OPTIONS_PLIST }}
     APP_NAME_STAGING: ${{ 'medev-weather-app/ENV_STAGING' }}
+    APP_CENTER_TOKEN_STAGING: ${{ secrets.APP_CENTER_TOKEN_STAGING}}
     TESTING_GROUP_STAGING: ${{ 'ENV_STAGING' }}
     ARTIFACT_NAME: ${{ 'app_artifact' }}
 
@@ -107,7 +108,7 @@ jobs:
             - name: Upload application
               uses: actions/upload-artifact@v3
               with:
-                name: app_artifact
+                name: ${{ env.ARTIFACT_NAME }}
                 path: ${{ runner.temp }}/build/WeatherApp.ipa
                 # you can also archive the entire directory 
                 # path: ${{ runner.temp }}/build
@@ -119,17 +120,19 @@ jobs:
                 security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
                 rm ~/Library/MobileDevice/Provisioning\ Profiles/*.mobileprovision
 
-    deploy:
+    deploy-app-center:
         needs: [ios-build]
         if: success()
-        name: Deploy
+        name: Deploy To App Center
         runs-on: ubuntu-latest
 
         steps:
 
-        - uses: actions/checkout@master
-            
-        - uses: actions/download-artifact@v3
+        - name: checkout repository
+          uses: actions/checkout@v3
+          
+        - name: download artifact
+          uses: actions/download-artifact@v3
           with:
             name: ${{ env.ARTIFACT_NAME }}
             
