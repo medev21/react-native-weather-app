@@ -91,15 +91,15 @@ jobs:
                 cd ios
                 pod install --repo-update
               
-            # note: you're under ios directory from now on
             - name: Create build folder
               run: |
                 mkdir -p build && mkdir -p staging && mkdir -p prod
+                ls
     
             
             - name: Build archive
               run: |
-                xcodebuild -workspace WeatherApp.xcworkspace \
+                xcodebuild -workspace ios/WeatherApp.xcworkspace \
                 -scheme "WeatherApp" \
                 -sdk iphoneos \
                 -configuration Debug \
