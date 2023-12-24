@@ -129,7 +129,7 @@ jobs:
 
         - uses: actions/checkout@master
             
-        - uses: actions/actions/download-artifact@v3
+        - uses: actions/download-artifact@v3
           with:
             name: ${{ env.ARTIFACT_NAME }}
             
