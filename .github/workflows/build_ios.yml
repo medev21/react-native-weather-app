@@ -90,14 +90,16 @@ jobs:
                 echo "Current directory: $(pwd)"
                 cd ios
                 pod install --repo-update
-                
+              
+            # note: you're under ios directory from now on
             - name: Create build folder
               run: |
                 mkdir -p build && mkdir -p staging && mkdir -p prod
     
+            
             - name: Build archive
               run: |
-                xcodebuild -workspace ios/WeatherApp.xcworkspace \
+                xcodebuild -workspace WeatherApp.xcworkspace \
                 -scheme "WeatherApp" \
                 -sdk iphoneos \
                 -configuration Debug \
@@ -149,7 +151,7 @@ jobs:
             # path: ${{ runner.temp }}/build
 
         - name: Display structure of download files
-          run: ls -R ${{ runner.temp }}/build
+          run: ls
             
         - name: set up JDK 1.8
           uses: actions/setup-java@v1
