@@ -20,7 +20,7 @@ jobs:
             - name: Create Dummy Artifact
               run: |
                 # Create a dummy file (e.g., a text file)
-                echo "This is a dummy artifact" > dummy.txt
+                echo "This is a dummy artifact" > dummy.ipa
 
             - name: Upload application
               uses: actions/upload-artifact@v3
