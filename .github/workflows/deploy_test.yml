@@ -9,6 +9,27 @@ env:
     ARTIFACT_NAME: ${{ 'app_artifact' }}
 
 jobs:
+    build-test:
+        name: IOS Production Build
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: checkout repository
+              uses: actions/checkout@v3
+
+            - name: Create Dummy Artifact
+              run: |
+                # Create a dummy file (e.g., a text file)
+                echo "This is a dummy artifact" > dummy.txt
+
+            - name: Upload application
+              uses: actions/upload-artifact@v3
+              with:
+                name: app_artifact
+                path: dummy.txt
+                retention-days: 3
+            
+
     deploy-ios:
         name: Deploy IOS
         runs-on: ubuntu-latest
