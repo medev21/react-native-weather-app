@@ -57,6 +57,6 @@ jobs:
             token: ${{ env.APP_CENTER_TOKEN_STAGING }}
             group: ${{ env.TESTING_GROUP_STAGING }}
             # file: ${{ runner.temp }}/build/WeatherApp.ipa
-            file: dummy.txt
+            file: dummy.ipa
             notifyTesters: true
             debug: false
