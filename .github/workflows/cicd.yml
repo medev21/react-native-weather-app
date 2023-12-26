@@ -2,25 +2,19 @@ name: IOS Production Build
 
 on: [push]
 
-env:
-    ARCHIVE_PATH: ${{ 'build/WeatherApp.xcarchive' }}
-    EXPORT_PATH_STAGING: ${{ 'staging/' }}
-    UPLOAD_FILE_STAGING: ${{ 'staging/WeatherApp.ipa' }}
-    ARTIFACT_NAME: ${{ 'app_artifact' }}
-    BUILD_CERTIFICATE_BASE64: ${{ secrets.IOS_P12_BASE64 }}
-    P12_PASSWORD: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
-    PROVISION_PROFILES_BASE64: ${{ secrets.IOS_MOBILE_PROVISION_BASE64 }}
-    KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
-    EXPORT_OPTIONS_PLIST: ${{ secrets.EXPORT_OPTIONS_PLIST }}
-    APP_NAME_STAGING: ${{ 'medev-weather-app/ENV_STAGING' }}
-    APP_CENTER_TOKEN_STAGING: ${{ secrets.APP_CENTER_TOKEN_STAGING}}
-    TESTING_GROUP_STAGING: ${{ 'ENV_STAGING' }}
-
 jobs:
     build-ios:
         uses: ./.github/workflows/buildIOS.yml
+        secrets:
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.IOS_P12_BASE64 }}
+          P12_PASSWORD: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
+          PROVISION_PROFILES_BASE64: ${{ secrets.IOS_MOBILE_PROVISION_BASE64 }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+          EXPORT_OPTIONS_PLIST: ${{ secrets.EXPORT_OPTIONS_PLIST }}
 
     deploy-app-center:
         needs: [build-ios]
         if: success()
         uses: ./.github/workflows/deployAppCenter.yml
+        secrets:
+          APP_CENTER_TOKEN_STAGING: ${{ secrets.APP_CENTER_TOKEN_STAGING}}

@@ -1,7 +1,18 @@
 name: Build IOS
 
 on:
-    workflow_call
+    workflow_call:
+        secrets:
+            BUILD_CERTIFICATE_BASE64:
+                required: true
+            P12_PASSWORD:
+                required: true
+            PROVISION_PROFILES_BASE64:
+                required: true
+            KEYCHAIN_PASSWORD:
+                required: true
+            EXPORT_OPTIONS_PLIST:
+                required: true
 
 env:
     ARCHIVE_PATH: ${{ 'build/WeatherApp.xcarchive' }}

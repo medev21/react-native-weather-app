@@ -1,7 +1,10 @@
 name: Deploy To App Center
 
 on:
-    workflow_call
+    workflow_call:
+      secrets:
+        APP_CENTER_TOKEN_STAGING:
+            required: true
 
 env:
     EXPORT_PATH_STAGING: ${{ 'staging/' }}
