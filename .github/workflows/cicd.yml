@@ -135,7 +135,6 @@ jobs:
     deploy-app-center:
         needs: [ios-build]
         if: success()
-        name: Deploy To App Center
         uses: ./github/workflows/deployAppCenter.yml
         # runs-on: ubuntu-latest
 
