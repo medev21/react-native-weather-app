@@ -8,7 +8,6 @@ on: [push]
 
 env:
     ARCHIVE_PATH: ${{ 'build/WeatherApp.xcarchive' }}
-    # ARTIFACT_PATH_STAGING: ${{ 'staging/' }}
     EXPORT_PATH_STAGING: ${{ 'staging/' }}
     UPLOAD_FILE_STAGING: ${{ 'staging/WeatherApp.ipa' }}
     ARTIFACT_NAME: ${{ 'app_artifact' }}
@@ -137,35 +136,36 @@ jobs:
         needs: [ios-build]
         if: success()
         name: Deploy To App Center
-        runs-on: ubuntu-latest
+        uses: ./github/workflows/deployAppCenter.yml
+        # runs-on: ubuntu-latest
 
-        steps:
+        # steps:
 
-        - name: checkout repository
-          uses: actions/checkout@v3
+        # - name: checkout repository
+        #   uses: actions/checkout@v3
           
-        - name: download artifact
-          uses: actions/download-artifact@v3
-          with:
-            name: ${{ env.ARTIFACT_NAME }}
-            # path: ${{ runner.temp }}/build
-            path: ${{ env.EXPORT_PATH_STAGING }}
+        # - name: download artifact
+        #   uses: actions/download-artifact@v3
+        #   with:
+        #     name: ${{ env.ARTIFACT_NAME }}
+        #     # path: ${{ runner.temp }}/build
+        #     path: ${{ env.EXPORT_PATH_STAGING }}
 
-        - name: Display structure of download files
-          run: ls
+        # - name: Display structure of download files
+        #   run: ls
             
-        - name: set up JDK 1.8
-          uses: actions/setup-java@v1
-          with:
-            java-version: 1.8
+        # - name: set up JDK 1.8
+        #   uses: actions/setup-java@v1
+        #   with:
+        #     java-version: 1.8
 
-        - name: Upload to App Center STAGING
-          uses: wzieba/AppCenter-Github-Action@v1
-          with:
-            appName: ${{ env.APP_NAME_STAGING }}
-            token: ${{ env.APP_CENTER_TOKEN_STAGING }}
-            group: ${{ env.TESTING_GROUP_STAGING }}
-            # file: ${{ runner.temp }}/build/WeatherApp.ipa
-            file: ${{ env.UPLOAD_FILE_STAGING }}
-            notifyTesters: true
-            debug: false
+        # - name: Upload to App Center STAGING
+        #   uses: wzieba/AppCenter-Github-Action@v1
+        #   with:
+        #     appName: ${{ env.APP_NAME_STAGING }}
+        #     token: ${{ env.APP_CENTER_TOKEN_STAGING }}
+        #     group: ${{ env.TESTING_GROUP_STAGING }}
+        #     # file: ${{ runner.temp }}/build/WeatherApp.ipa
+        #     file: ${{ env.UPLOAD_FILE_STAGING }}
+        #     notifyTesters: true
+        #     debug: false
