@@ -5,6 +5,8 @@ on:
       secrets:
         APP_CENTER_TOKEN_STAGING:
             required: true
+        ANDROID_APP_CENTER_TOKEN_STAGING:
+            required: true
 
 env:
     EXPORT_PATH_STAGING: ${{ 'staging/' }}
@@ -14,7 +16,7 @@ env:
     APP_CENTER_TOKEN_STAGING: ${{ secrets.APP_CENTER_TOKEN_STAGING}}
     TESTING_GROUP_STAGING: ${{ 'ENV_STAGING' }}
     ANDROID_APP_NAME_STAGING: ${{ 'medev-weather-app/ANDROID_ENV_STAGING' }}
-    ANDROID_APP_CENTER_TOKEN_STAGING: ${{ secrets.ANDROID_APP_CENTER_TOKEN_STAGING}}
+    ANDROID_APP_CENTER_TOKEN_STAGING: ${{ secrets.ANDROID_APP_CENTER_TOKEN_STAGING }}
     ANDROID_TESTING_GROUP_STAGING: ${{ 'ANDROID_ENV_STAGING' }}
     ANDROID_ARTIFACT_NAME: ${{ 'android_artifact' }}
     ANDROID_EXPORT_PATH_STAGING: ${{ 'android/app/build/outputs/bundle/release/' }}
