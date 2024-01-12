@@ -28,4 +28,4 @@ jobs:
         uses: ./.github/workflows/deployAppCenter.yml
         secrets:
           APP_CENTER_TOKEN_STAGING: ${{ secrets.APP_CENTER_TOKEN_STAGING}}
-          ANDROID_APP_TOKEN_STAGING: ${{ secrets.ANDROID_APP_CENTER_TOKEN_STAGING }}
+          ANDROID_APP_CENTER_TOKEN_STAGING: ${{ secrets.ANDROID_APP_CENTER_TOKEN_STAGING }}
