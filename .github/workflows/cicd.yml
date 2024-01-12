@@ -3,21 +3,20 @@ name: IOS Production Build
 on: [push]
 
 jobs:
-    # build-ios:
-    #     uses: ./.github/workflows/buildIOS.yml
-    #     secrets:
-    #       BUILD_CERTIFICATE_BASE64: ${{ secrets.IOS_P12_BASE64 }}
-    #       P12_PASSWORD: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
-    #       PROVISION_PROFILES_BASE64: ${{ secrets.IOS_MOBILE_PROVISION_BASE64 }}
-    #       KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
-    #       EXPORT_OPTIONS_PLIST: ${{ secrets.EXPORT_OPTIONS_PLIST }}
+    build-ios:
+        uses: ./.github/workflows/buildIOS.yml
+        secrets:
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.IOS_P12_BASE64 }}
+          P12_PASSWORD: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
+          PROVISION_PROFILES_BASE64: ${{ secrets.IOS_MOBILE_PROVISION_BASE64 }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+          EXPORT_OPTIONS_PLIST: ${{ secrets.EXPORT_OPTIONS_PLIST }}
 
     build-android:
         uses: ./.github/workflows/buildAndroid.yml
 
     deploy-app-center:
-        # needs: [build-ios]
-        needs: [build-android]
+        needs: [build-ios, build-android]
         if: success()
         uses: ./.github/workflows/deployAppCenter.yml
         secrets:
