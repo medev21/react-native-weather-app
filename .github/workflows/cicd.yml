@@ -21,9 +21,11 @@ jobs:
         #   ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         #   ANDROID_KEYSTORE_NAME: ${{ secrets.ANDROID_KEYSTORE_NAME }}
 
-    # deploy-app-center:
-    #     needs: [build-ios]
-    #     if: success()
-    #     uses: ./.github/workflows/deployAppCenter.yml
-    #     secrets:
-    #       APP_CENTER_TOKEN_STAGING: ${{ secrets.APP_CENTER_TOKEN_STAGING}}
+    deploy-app-center:
+        # needs: [build-ios]
+        needs: [build-android]
+        if: success()
+        uses: ./.github/workflows/deployAppCenter.yml
+        secrets:
+          APP_CENTER_TOKEN_STAGING: ${{ secrets.APP_CENTER_TOKEN_STAGING}}
+          ANDROID_APP_TOKEN_STAGING: ${{ secrets.ANDROID_APP_CENTER_TOKEN_STAGING }}

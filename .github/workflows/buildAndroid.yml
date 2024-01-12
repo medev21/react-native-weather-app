@@ -1,13 +1,11 @@
-name: Build Android
+name: Android Workflow
 
 on:
     workflow_call
 
 env:
     ARTIFACT_NAME: ${{ 'android_artifact' }}
-    # EXPORT_PATH_STAGING: ${{ 'android/app/build/outputs/bundle/release/app-release.aab' }}
-    EXPORT_PATH_STAGING: ${{ 'android/app/build/outputs/apk/release/' }}
-
+    EXPORT_PATH_STAGING: ${{ 'android/app/build/outputs/bundle/release/' }}
 
 jobs:
     build:
